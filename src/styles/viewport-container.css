@@ -1,4 +1,4 @@
-.viewport-bg {
+.viewport-container {
     position: absolute;
     z-index: -999;
     width: 100%;
@@ -7,14 +7,14 @@
 }
 
 
-.viewport-bg-img {
+.viewport-container-img {
     width: 100%;
     z-index: -998;
     position: absolute;
 }
 
 
-.image-frame {
+.viewport-container-img-frame {
     position: absolute;
     top: 0;
     background-color: #000;

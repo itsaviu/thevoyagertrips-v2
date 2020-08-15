@@ -4,7 +4,7 @@
     position: relative;
 }
 
-.viewport-container {
+.viewport {
     position: absolute;
     width: 100%;
     height: 100%;

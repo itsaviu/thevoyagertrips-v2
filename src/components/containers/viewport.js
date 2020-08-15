@@ -1,8 +1,7 @@
 import React, {createRef, useRef, useState} from 'react';
-import ViewportBg from "../presentations/viewport-bg";
+import ViewportContainer from "../presentations/viewport-container";
 import {VISITED_PLACES} from "../../config/config";
 import Header from "../presentations/header";
-import ViewportContent from "./viewport-content";
 import '../../styles/viewport.css';
 import WindowDimensions from "../utils/windowDimensions";
 
@@ -32,7 +31,7 @@ const Viewport = (props) => {
             scrollActive = false;
             enableWheel();
             callback();
-        }, 1500);
+        }, 1000);
     };
 
     const scrollDown = () => {
@@ -77,10 +76,9 @@ const Viewport = (props) => {
         <Header/>
         {vistedPlaces.map((vistedPlace, i) =>
             <div key={i} id={vistedPlace.place} ref={elRefs.current[i]}
-                 className={`viewport-container ${i !== current ? 'viewport-shrink' : 'viewport-ontop'}`} onWheel={onWheelEvent}>
-                <ViewportBg selectedPlace={vistedPlace}>
-                    <ViewportContent selectedPlace={vistedPlace}/>
-                </ViewportBg>
+                 className={`viewport ${i !== current ? 'viewport-shrink' : 'viewport-ontop'}`}
+                 onWheel={onWheelEvent}>
+                <ViewportContainer selectedPlace={vistedPlace}/>
             </div>)}
     </div>
 };
