@@ -29,7 +29,6 @@ const Viewport = (props) => {
 
     const commonScrollActive = (callback) => {
         setTimeout(() => {
-            console.log('scroll Enabled');
             scrollActive = false;
             enableWheel();
             callback();
@@ -38,21 +37,20 @@ const Viewport = (props) => {
 
     const scrollDown = () => {
         let selected = current;
-        console.log(selected);
-        console.log(elRefs.current[selected].current);
-        elRefs.current[selected].current.style.transition = 'all 700ms ease-in 0s';
-        elRefs.current[selected].current.style.transform = `translate3d(0px, -100%, 0px)`;
-        console.log(elRefs.current[selected].current.style.transform);
+        elRefs.current[selected].current.style.setProperty('transition', 'all 700ms ease-in 0s');
+        elRefs.current[selected].current.style.setProperty('transform', 'translate3d(0px, -100%, 0px)');
+        elRefs.current[selected - 1].current.style.setProperty('transition', 'all 700ms ease-in 0s');
+        elRefs.current[selected - 1].current.style.setProperty('transform', 'translate3d(0px, 0px, 0px)', 'important');
         commonScrollActive(() => setCurrent(current - 1));
     };
 
     const scrollUp = () => {
         let selected = current + 1;
-        console.log(selected);
-        console.log(elRefs.current[selected].current);
-        elRefs.current[selected].current.style.transition = 'all 700ms ease-in 0s';
-        elRefs.current[selected].current.style.transform = `translate3d(0px, 0px, 0px)`;
-        console.log(elRefs.current[selected].current.style.transform);
+        elRefs.current[selected].current.style.setProperty('transition', 'all 700ms ease 0s');
+        elRefs.current[selected].current.style.setProperty('transform', 'translate3d(0px, 0px, 0px)');
+        elRefs.current[selected].current.style.setProperty('z-index', '0');
+        elRefs.current[current].current.style.setProperty('transition', 'all 700ms ease 0s');
+        elRefs.current[current].current.style.setProperty('transform', 'translate3d(0px, 400px, 0px)');
         commonScrollActive(() => setCurrent(selected));
     };
 
@@ -60,7 +58,7 @@ const Viewport = (props) => {
         if (!scrollActive) {
             disableWheel();
             scrollActive = true;
-            if (event.deltaY > 0 && current - 1 >=0) {
+            if (event.deltaY > 0 && current - 1 >= 0) {
                 scrollDown();
                 return;
             } else if (event.deltaY < 0 && current + 1 < elRefs.current.length) {
@@ -75,12 +73,11 @@ const Viewport = (props) => {
 
     Array(vistedPlaces.length).fill().map((_, i) => elRefs.current[i] = createRef());
 
-    console.log(elRefs.current.length);
     return <div style={viewPort}>
         <Header/>
         {vistedPlaces.map((vistedPlace, i) =>
             <div key={i} id={vistedPlace.place} ref={elRefs.current[i]}
-                 className={`viewport-container`} onWheel={onWheelEvent}>
+                 className={`viewport-container ${i !== current ? 'viewport-shrink' : 'viewport-ontop'}`} onWheel={onWheelEvent}>
                 <ViewportBg selectedPlace={vistedPlace}>
                     <ViewportContent selectedPlace={vistedPlace}/>
                 </ViewportBg>

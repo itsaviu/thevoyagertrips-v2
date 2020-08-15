@@ -11,10 +11,11 @@
 }
 
 
-.viewport-show {
-    display: block;
+.viewport-shrink {
+    transform:  translate3d(0px, 400px, 0px);
+    z-index: -1;
 }
 
-.viewport-hide {
-    display: none;
+.viewport-ontop {
+    z-index: 0;
 }
