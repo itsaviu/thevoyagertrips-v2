@@ -1,0 +1,20 @@
+.viewport-slider {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.viewport-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+.viewport-show {
+    display: block;
+}
+
+.viewport-hide {
+    display: none;
+}

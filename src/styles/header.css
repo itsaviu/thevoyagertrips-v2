@@ -1,5 +1,9 @@
 .header {
     text-align: center;
+    position: fixed;
+    z-index: 9999999;
+    left: 50%;
+    transform: translate(-50%, 0);
     font-family: serif;
     color: white;
     padding-top: 50px;

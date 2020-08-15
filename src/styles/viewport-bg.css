@@ -2,7 +2,7 @@
     position: absolute;
     z-index: -999;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -10,7 +10,6 @@
 .viewport-bg-img {
     width: 100%;
     z-index: -998;
-    /*bottom: 0px;*/
     position: absolute;
 }
 
@@ -22,5 +21,5 @@
     opacity: .3;
     z-index: -10;
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
