@@ -1,0 +1,106 @@
+.viewport-card {
+    display: inline-flex;
+    position: relative;
+    top: 22%;
+    height: 450px;
+}
+
+.viewport-card-layout {
+    transition: all 700ms ease 0ms;
+    width: 100%;
+    display: inherit;
+}
+
+.viewport-card-title {
+    font-family: Alata, serif;
+    font-size: 23px;
+    color: #e2e2e2;
+    position: relative;
+    top: 13%;
+    left: 26px;
+    /*padding-bottom: 11px;*/
+    /*left: 7px;*/
+    z-index: 10000;
+}
+
+.viewport-card-img {
+    width: 100%;
+    border-radius: 21px;
+}
+
+.viewport-card-img-active {
+    width: 500px;
+}
+
+
+.viewport-card-container {
+    margin-right: 20px;
+    width: 400px;
+    transition: all 700ms ease 0ms;
+}
+
+.viewport-card-container-active {
+    width: 500px;
+}
+
+.viewport-card-container-inactive {
+    position: relative;
+    top: 7%;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 8%;
+    width: 100%;
+    border-radius: 19px;
+    height: 67%;
+    background-color: black;
+    opacity: .2;
+}
+
+.card-overlay-active {
+    width: 500px;
+    height: 83%;
+}
+
+.viewport-card-slick {
+    position: absolute;
+    display: flex;
+    color: #e2e2e2;
+    font-size: 30px;
+    bottom: -12%;
+}
+
+.viewport-card-counter-divider {
+    width: 300px;
+    height: 1px;
+    background-color: #ffffff9e;
+    margin-top: 14px;
+}
+
+.viewport-card-counter {
+    font-size: 16px;
+    font-family: monospace;
+    position: relative;
+    margin-top: 2px;
+    margin-left: 20px;
+}
+
+.viewport-card-slick-pointer {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.viewport-close {
+    position: absolute;
+    text-decoration: underline;
+    left: 1%;
+    color: #d6d7da;
+    z-index: 10000;
+    transition: all 200ms;
+}
+
+.viewport-close:hover {
+    color: white;
+    cursor: pointer;
+}

@@ -4,6 +4,7 @@ import {VISITED_PLACES} from "../../config/config";
 import Header from "../presentations/header";
 import '../../styles/viewport.css';
 import WindowDimensions from "../utils/windowDimensions";
+import {doubleDigit} from "../../utils/utils";
 
 const Viewport = (props) => {
 
@@ -46,9 +47,7 @@ const Viewport = (props) => {
     const scrollDown = () => {
         let selected = current;
         let slickMovement = (elRefs.current.length - selected) * 100;
-        console.log(counterRef.current);
         counterRef.current.innerHTML = doubleDigit((configLength + 1) - (selected - 1));
-        console.log(counterRef.current.innerHTML);
         slickContainerRef.current.style.setProperty('transform', `translate3d(0px, -${slickMovement}px, 0px)`);
         slickRef.current[selected].current.classList.remove('viewport-slick-active');
         slickRef.current[selected - 1].current.classList.add('viewport-slick-active');
@@ -91,7 +90,6 @@ const Viewport = (props) => {
 
     };
 
-    const doubleDigit = (value) => value < 10 ? '0' + value : value;
 
     Array(vistedPlaces.length).fill().map((_, i) => elRefs.current[i] = createRef());
     Array(vistedPlaces.length).fill().map((_, i) => slickRef.current[i] = createRef());
