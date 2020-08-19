@@ -8,6 +8,7 @@ const ViewportContent = (props) => {
     const [showVisits, setShowVisits] = useState(false);
 
     return <Row className={'viewport-content'}>
+        <div className={`${showVisits ? 'viewport-content-img-frame' : ''}`}/>
         <Col span={9} data-aos="fade-up">
             <ViewportPlaceDetail
                 showVisitView={() => setShowVisits(!showVisits)}

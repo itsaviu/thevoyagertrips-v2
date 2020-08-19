@@ -13,10 +13,6 @@ const ViewportCard = (props) => {
 
     if (!props.visits) return <div/>;
 
-    const hideView = () => {
-        props.hideVisitView();
-    };
-
     const onPrev = () => {
         let prev = selected - 1;
         if (prev < 0) return;
@@ -42,7 +38,6 @@ const ViewportCard = (props) => {
     Array(props.visits.length).fill().map((_, i) => cardRef.current[i] = createRef());
 
     return <div className={'viewport-card'}>
-        <div className={'viewport-close'} onClick={() => hideView()}>Close & view the Background</div>
         <div ref={cardHolderRef} className={'viewport-card-layout'} data-aos="fade-up">
             {props.visits && props.visits.map((visit, i) =>
                 <div key={i} ref={cardRef.current[i]}
