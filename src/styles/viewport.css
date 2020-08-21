@@ -87,3 +87,11 @@
     left: 1.53%;
     font-family: monospace;
 }
+
+.viewport-destination-selector {
+    position: absolute;
+    z-index: 10;
+    background-color: transparent;
+    padding-top: 50px;
+    padding-left: 90px;
+}

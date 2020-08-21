@@ -11,6 +11,13 @@
     letter-spacing: 4px;
 }
 
+
+.destination-header {
+    color: #383737;
+    top: 30%;
+}
+
+
 .header-item-logo {
     font-size: 20px;
 }

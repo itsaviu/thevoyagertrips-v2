@@ -14,14 +14,25 @@
     animation: zoominoutsinglefeatured 50s infinite ;
 }
 
+
+.viewport-container-img-frame {
+    position: absolute;
+    top: 0;
+    background-color: #000;
+    opacity: .15;
+    z-index: -10;
+    width: 100%;
+    height: 100%;
+}
+
 @keyframes zoominoutsinglefeatured {
     0% {
-        transform: scale(1.2,1.2);
+        transform: scale(1,1);
     }
     50% {
-        transform: scale(1.4,1.4);
+        transform: scale(1.2,1.2);
     }
     100% {
-        transform: scale(1.2,1.2);
+        transform: scale(1,1);
     }
 }

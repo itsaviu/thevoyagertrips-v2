@@ -1,16 +1,21 @@
 import React, {createRef, useRef, useState} from 'react';
 import ViewportContainer from "../presentations/viewport-container";
-import {VISITED_PLACES} from "../../config/config";
+import {getPlacesByCategory} from "../../config/config";
 import Header from "../presentations/header";
 import '../../styles/viewport.css';
 import WindowDimensions from "../utils/windowDimensions";
 import {doubleDigit} from "../../utils/utils";
+import ViewportDestinations from "./viewport-destinations";
 
 const Viewport = (props) => {
 
-    const vistedPlaces = VISITED_PLACES[props.category];
+    const [vistedPlaces, setVistedPlaces] = useState(props.destinations);
+    // const vistedPlaces = props.destinations;
+
+    console.log(vistedPlaces);
 
     const [current, setCurrent] = useState(vistedPlaces.length - 1);
+    console.log(current);
 
     const elRefs = useRef([]);
 
@@ -35,6 +40,13 @@ const Viewport = (props) => {
     const disableWheel = () => window.addEventListener("wheel", (e) => e.preventDefault(), {passive: false});
 
     const enableWheel = () => window.removeEventListener("wheel", (e) => e.preventDefault(), false);
+
+    const onOptionChange = (value) => {
+        const vistedPlaces = getPlacesByCategory(value).places;
+        props.setCategory(value);
+        setVistedPlaces(vistedPlaces);
+        setCurrent(vistedPlaces.length - 1);
+    };
 
     const commonScrollActive = (callback) => {
         setTimeout(() => {
@@ -61,7 +73,7 @@ const Viewport = (props) => {
     const scrollUp = () => {
         let selected = current + 1;
         let slickMovement = (elRefs.current.length - selected - 1) * 100;
-        counterRef.current.innerHTML = doubleDigit((configLength + 1 ) - selected);
+        counterRef.current.innerHTML = doubleDigit((configLength + 1) - selected);
         slickContainerRef.current.style.setProperty('transform', `translate3d(0px, -${slickMovement}px, 0px)`);
         elRefs.current[selected].current.style.setProperty('transition', 'all 700ms ease 0s');
         slickRef.current[current].current.classList.remove('viewport-slick-active');
@@ -91,15 +103,29 @@ const Viewport = (props) => {
     };
 
 
+    const makeid = (length) => {
+        let result = "";
+        const characters =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
     Array(vistedPlaces.length).fill().map((_, i) => elRefs.current[i] = createRef());
     Array(vistedPlaces.length).fill().map((_, i) => slickRef.current[i] = createRef());
 
     return <div style={viewPort}>
         <Header/>
+        <div className={'viewport-destination-selector'}>
+            <ViewportDestinations setCategory={(value) => onOptionChange(value)}/>
+        </div>
         <div className={'viewport-slick'}>
             <div className={'viewport-slick-line'}/>
             <div className={'viewport-slick-container'} ref={slickContainerRef}>
-                {vistedPlaces.map((_, i) => <div key={i} ref={slickRef.current[configLength - i]}
+                {vistedPlaces.map((_, i) => <div key={makeid(5)} ref={slickRef.current[configLength - i]}
                                                  className={`viewport-slick-index ${configLength - i === current ? 'viewport-slick-active' : ''}`}>{i + 1}</div>)}
             </div>
         </div>
@@ -109,7 +135,7 @@ const Viewport = (props) => {
             <span>{doubleDigit(configLength + 1)}</span>
         </div>
         {vistedPlaces.map((vistedPlace, i) =>
-            <div key={i} id={vistedPlace.place} ref={elRefs.current[i]}
+            <div key={makeid(5)} id={vistedPlace.place} ref={elRefs.current[i]}
                  className={`viewport ${i !== current ? 'viewport-shrink' : 'viewport-ontop'}`}
                  onWheel={onWheelEvent}>
                 <ViewportContainer selectedPlace={vistedPlace}/>
