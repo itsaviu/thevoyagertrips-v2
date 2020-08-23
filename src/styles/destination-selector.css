@@ -1,0 +1,11 @@
+.destination-selector {
+    position: absolute;
+    z-index: 5;
+    padding-top: 60px;
+    left: 6.4%;
+}
+
+
+.menu-item {
+    color: white;
+}

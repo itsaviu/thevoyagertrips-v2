@@ -1,14 +1,25 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import Viewport from "./components/containers/viewport";
-import {CATEGORY} from "./config/config";
+import {CATEGORIES, getPlacesByCategory} from "./config/config";
 
 
 const App = () => {
 
-    const [category] = useState(CATEGORY[0]);
+    const [category, setCategory] = useState(CATEGORIES[0].name);
 
+    const [destinations, setDestionations] = useState([]);
+
+    useEffect(() => {
+        setDestionations(getPlacesByCategory(category).places);
+    }, [category]);
+
+    const onUpdateCategory = (newCategory) => {
+        setCategory(newCategory);
+    };
+
+    console.log('App : ' + category);
     return <div className={"app"}>
-        <Viewport category={category}/>
+        {category ? <Viewport category={category} destinations={destinations} updateCategory={(category) => onUpdateCategory(category)}/> : <div/>}
     </div>
 };
 
